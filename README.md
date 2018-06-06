@@ -1,8 +1,8 @@
 # arduino-esp32 BLE-MIDI
 
-MIDI over BLE example for the ESP32 Arduino core.
+MIDI over BLE example for the ESP32 Arduino core and iOS(Garageband)
 
-Tested with Linux client (Bluez >=5.44) and Windows 10 Creators Update 1.
+Tested with Garageband on iPhone. (iOS 11.4)
 
 Timestamps are not implemented.
 
