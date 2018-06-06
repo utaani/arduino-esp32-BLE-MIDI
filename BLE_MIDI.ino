@@ -43,7 +43,7 @@ void setup() {
   BLEDevice::init("ESP32 MIDI Example");
 
   // Create the BLE Server
-  BLEServer *pServer = new BLEServer();
+  BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
   
   // Create the BLE Service
@@ -65,8 +65,15 @@ void setup() {
   // Start the service
   pService->start();
 
-  // Start advertising
-  pServer->getAdvertising()->start();
+  // Start advertising (for iOS)
+  BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
+  oAdvertisementData.setFlags(0x04);
+  oAdvertisementData.setCompleteServices(BLEUUID(MIDI_SERVICE_UUID));
+  oAdvertisementData.setName("ESP32 MIDI Example");
+  BLEAdvertising *pAdvertising;
+  pAdvertising = pServer->getAdvertising();
+  pAdvertising->setAdvertisementData(oAdvertisementData);
+  pAdvertising->start();
 }
 
 void loop() {
